@@ -26,7 +26,12 @@ def process_file(congno):
             j = json.loads(jfile)
 
             if not Vote.objects.filter(pk=j['vote_id']).count():
-                vote = Vote.objects.create(**dictToModel(Vote,j))
+            
+                obj = dictToModel(Vote,j)
+                if 'bill' in j.keys():
+                    obj['bill_id'] = "%s%s-%s" % (j['bill']['type'],j['bill']['number'],j['bill']['congress'])
+                            
+                vote = Vote.objects.create(**obj)
                     
                 for key in j['votes'].keys():
                     for member in j['votes'][key]:

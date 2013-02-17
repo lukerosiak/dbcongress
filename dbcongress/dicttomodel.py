@@ -24,6 +24,8 @@ def dictToModel(model,json):
         chunks = verbose.split('__')
         if chunks[0] in j.keys():
             j = j[chunks[0]]
+            if j==None:
+                return j
             if type(j)==list:
                 j = j[0]
             if len(chunks)==1:

@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 
 class Legislator(models.Model):
@@ -84,8 +83,16 @@ class Vote(models.Model):
     type = models.TextField(blank=True)
     updated_at = models.DateTimeField(null=True, auto_now=False)
 
+    bill_congress = models.TextField(blank=True,verbose_name="bill__congress")
+    bill_number = models.TextField(blank=True,verbose_name="bill__congress")
+    bill_type = models.TextField(blank=True,verbose_name="bill__congress")
+    bill = models.ForeignKey('Bill',null=True)
+
     def __unicode__(self):
         return "%s, %s" % (self.question, self.result)
+
+
+
 
 
 class VoteCast(models.Model):
@@ -172,6 +179,8 @@ class Bill(models.Model):
     status = models.TextField(blank=True)
     status_at = models.DateTimeField(null=True)
     subjects_top_term = models.TextField(blank=True)
+
+    summary_text = models.TextField(blank=True,verbose_name="summary__text")
 
     awaiting_signature = models.BooleanField(blank=True,verbose_name="history__awaiting_signature")
     enacted = models.BooleanField(blank=True,verbose_name="history__enacted")
