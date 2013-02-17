@@ -19,7 +19,7 @@ def removeNonAscii(s): return "".join(filter(lambda x: ord(x)<128, s))
 
 def process_file(congno):
 
-    BASE_DIR = os.path.join(settings.CACHE_DIR,'congress','data',"%s"%congno,'bills')
+    BASE_DIR = os.path.join(settings.CACHE_DIR,'congress','data',"%s"%congno,'amendments')
     os.chdir(BASE_DIR)
     for year in os.listdir('.'):
         os.chdir(os.path.join(BASE_DIR,year))
@@ -28,14 +28,16 @@ def process_file(congno):
             jfile = removeNonAscii(open('data.json','r').read())
             j = json.loads(jfile)
 
-            if not Bill.objects.filter(pk=j['bill_id']).count():
-                bill = Bill.objects.create(**dictToModel(Bill,j))
+            if not Amendment.objects.filter(pk=j['amendment_id']).count():
+                obj = dictToModel(Amendment,j)
+                print obj
+                amends_type = j['amends'][ "%s_type" % j['amends']['document_type'] ]
+                obj['amends_id'] = "%s%s-%s" % (amends_type,j['amends']['number'],j['amends']['congress'])
+                amendment = Amendment.objects.create(**obj)
                     
-                for cosponsor in j['cosponsors']:
-                    bill.cosponsor_set.create( **dictToModel(Cosponsor,cosponsor) )
+                #actions: for cosponsor in j['cosponsors']:
+                #    bill.cosponsor_set.create( **dictToModel(Cosponsor,cosponsor) )
 
-                for subject in j['subjects']:
-                    bill.billsubject_set.create( subject=subject )
 
 
 

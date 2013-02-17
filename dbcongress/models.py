@@ -173,6 +173,7 @@ class Bill(models.Model):
     short_title = models.TextField(blank=True)
     status = models.TextField(blank=True)
     status_at = models.DateTimeField(null=True)
+    subjects_top_term = models.TextField(blank=True)
 
     awaiting_signature = models.BooleanField(blank=True,verbose_name="history__awaiting_signature")
     enacted = models.BooleanField(blank=True,verbose_name="history__enacted")
@@ -190,6 +191,9 @@ class Cosponsor(models.Model):
     sponsored_at = models.DateField(null=True)
     withdrawn_at = models.DateField(null=True)
 
+class BillSubject(models.Model):
+    bill = models.ForeignKey(Bill)
+    subject = models.TextField()
 
 
 
@@ -258,7 +262,7 @@ class Cosponsor(models.Model):
   }, 
   "status": "REFERRED", #ok
   "status_at": "2013-01-22", #ok
-  "subjects": [
+  "subjects": [ ####todo
     "Academic performance and assessments", 
     "Advanced technology and technological innovations", 
     "Alternative and renewable resources", 
@@ -309,3 +313,36 @@ class Cosponsor(models.Model):
   ], 
   "updated_at": "2013-02-16T04:17:49-05:00"
 }"""
+
+
+
+
+
+class Amendment(models.Model):
+    #need to do actions
+    amendment_id = models.TextField(primary_key=True)
+    amendment_type = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
+    congress = models.TextField(blank=True)
+    description = models.TextField(blank=True,null=True)
+    house_number = models.TextField(blank=True)
+    senate_number = models.TextField(blank=True)
+    number = models.TextField(blank=True)      
+    offered_at = models.DateField(null=True,blank=True)
+    proposed_at = models.DateField(null=True,blank=True)   
+    purpose = models.TextField(blank=True)      
+    status = models.TextField(blank=True)      
+    status_at = models.DateTimeField(null=True,blank=True)      
+    submitted_at = models.DateField(null=True,blank=True)      
+    title = models.TextField(blank=True)      
+    sponsor_name = models.TextField(blank=True,verbose_name="sponsor__name")      
+    sponsor_thomas_id = models.TextField(blank=True,verbose_name="sponsor__thomas_id")      
+    sponsor_type = models.TextField(blank=True,verbose_name="sponsor__type")      
+
+    amends_type = models.TextField(blank=True,verbose_name="amends__bill_type")      
+    amends_document_type = models.TextField(blank=True,verbose_name="amends__document_type")      
+    amends_number = models.TextField(blank=True)      
+    amends_congress = models.TextField(blank=True)      
+    amends_id = models.TextField(blank=True)      
+    
+

@@ -15,7 +15,7 @@ from dbcongress.models import *
 from dbcongress.dicttomodel import dictToModel
 
 
-BASE_DIR = os.path.join(settings.CACHE_DIR,'cache','congress-legislators')
+BASE_DIR = os.path.join(settings.CACHE_DIR,'congress-legislators')
 current_committees = os.path.join(BASE_DIR, 'committees-current.yaml')
 current_members = os.path.join(BASE_DIR, 'committee-membership-current.yaml')
  

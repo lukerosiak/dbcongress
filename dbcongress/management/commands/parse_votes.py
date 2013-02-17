@@ -16,7 +16,7 @@ def removeNonAscii(s): return "".join(filter(lambda x: ord(x)<128, s))
 
 def process_file(congno):
 
-    BASE_DIR = os.path.join(settings.CACHE_DIR,'data',"%s" % congno,'votes')
+    BASE_DIR = os.path.join(settings.CACHE_DIR,'congress','data',"%s" % congno,'votes')
     os.chdir(BASE_DIR)
     for year in os.listdir('.'):
         os.chdir(os.path.join(BASE_DIR,year))

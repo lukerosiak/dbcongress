@@ -17,7 +17,10 @@ By Luke Rosiak
 import copy
 
 
-def traverse(verbose,j):
+
+def dictToModel(model,json):
+
+    def traverse(verbose,j):
         chunks = verbose.split('__')
         if chunks[0] in j.keys():
             j = j[chunks[0]]
@@ -29,7 +32,6 @@ def traverse(verbose,j):
                 return traverse('__'.join(chunks[1:]),j)
         return None
 
-def dictToModel(model,json):
     obj = {}    
     for field in model._meta.local_fields:
         if field.verbose_name.replace(' ','_')!=field.column:
@@ -42,6 +44,11 @@ def dictToModel(model,json):
 
         elif field.column in json.keys():
             obj[field.column] = json[field.column]
+
+    for key in obj.keys(): #can't pass None values to Postgres or it tries to force Null into not-null fields
+        if obj[key]==None:
+            del obj[key]
+
     return obj
     
 

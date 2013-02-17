@@ -12,13 +12,27 @@ By Luke Rosiak. A work in progress. Released under whatever terms you want.
 
 INSTRUCTIONS
 
-in local_settings.py, define the necessary variables
+If you don't already have them somewhere, in the same directory you install this app:
 
-in settings.py: from local_settings import *
+git clone https://github.com/unitedstates/congress-legislators
 
-run the congress scripts or clone the data and set the paths in the management/commands files
+git clone https://github.com/unitedstates/congress
 
-then
+create the JSON files in the Congress app by 
+
+cd congress
+
+./run votes
+./run bills
+./run amendments
+
+Now on to actually using this app:
+
+In local_settings.py, define the necessary variables
+
+In settings.py: from local_settings import *
+
+Then:
 
 python manage.py syncdb
 
@@ -30,8 +44,8 @@ python manage.py parse_votes
 
 python manage.py parse_bills
 
-(not all info is extracted from bills because the structure can vary. but improvements are welcome)
+python manage.py parse_amendments
 
-still need to do amendments and some others
+(not all info is extracted from bills because the structure can vary. but improvements are welcome)
 
 A lot of the magic happens in dicttomodel.py, that uses model introspection to intelligently fit JSON into Django model--not very complicated, but using this framework will make expanding and modifying the relational-db representations of the JSON files a lot simpler.
