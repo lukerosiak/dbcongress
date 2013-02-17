@@ -16,7 +16,7 @@ def removeNonAscii(s): return "".join(filter(lambda x: ord(x)<128, s))
 
 def process_file(congno):
 
-    BASE_DIR = '/home/luke/research/opencongress/congress/data/%s/votes' % congno
+    BASE_DIR = os.path.join(settings.CACHE_DIR,'data',"%s" % congno,'votes')
     os.chdir(BASE_DIR)
     for year in os.listdir('.'):
         os.chdir(os.path.join(BASE_DIR,year))
@@ -24,7 +24,6 @@ def process_file(congno):
             os.chdir(os.path.join(BASE_DIR,year,bill))
             jfile = removeNonAscii(open('data.json','r').read())
             j = json.loads(jfile)
-
 
             if not Vote.objects.filter(pk=j['vote_id']).count():
                 vote = Vote.objects.create(**dictToModel(Vote,j))

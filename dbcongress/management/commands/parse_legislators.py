@@ -10,9 +10,9 @@ from dbcongress.models import *
 from utils.file_chunker import yamlChunker
 
 
-PROJECT_ROOT = '/home/luke/research/govtrack.us-web/scripts/congress/cache/congress-legislators'
-current = os.path.join(PROJECT_ROOT, 'legislators-current.yaml')
-historic = os.path.join(PROJECT_ROOT, 'legislators-historical.yaml')
+BASE_DIR = os.path.join(settings.CACHE_DIR,'cache','congress-legislators')
+current = os.path.join(BASE_DIR,'legislators-current.yaml')
+historic = os.path.join(BASE_DIR, 'legislators-historical.yaml')
  
 def getmultidict(dictionary, key_list):
     try:

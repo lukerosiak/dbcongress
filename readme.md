@@ -12,13 +12,24 @@ By Luke Rosiak. A work in progress. Released under whatever terms you want.
 
 INSTRUCTIONS
 
-in settings.py, define CONGNO = 113
+in local_settings.py, define the necessary variables
+
+in settings.py: from local_settings import *
 
 run the congress scripts or clone the data and set the paths in the management/commands files
 
 then
 
 python manage.py syncdb
+
 python manage.py parse_legislators
+
 python manage.py parse_committees
+
 python manage.py parse_votes
+
+python manage.py parse_bills
+
+(not all info is extracted from bills because the structure can vary. but improvements are welcome)
+
+still need to do amendments and some others

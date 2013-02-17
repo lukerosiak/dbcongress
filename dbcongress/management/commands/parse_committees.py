@@ -15,10 +15,9 @@ from dbcongress.models import *
 from dbcongress.dicttomodel import dictToModel
 
 
-
-PROJECT_ROOT = '/home/luke/research/govtrack.us-web/scripts/congress/cache/congress-legislators'
-current_committees = os.path.join(PROJECT_ROOT, 'committees-current.yaml')
-current_members = os.path.join(PROJECT_ROOT, 'committee-membership-current.yaml')
+BASE_DIR = os.path.join(settings.CACHE_DIR,'cache','congress-legislators')
+current_committees = os.path.join(BASE_DIR, 'committees-current.yaml')
+current_members = os.path.join(BASE_DIR, 'committee-membership-current.yaml')
  
 def getmultidict(dictionary, key_list):
     try:
