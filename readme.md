@@ -23,14 +23,16 @@ create the JSON files in the Congress app by
 cd congress
 
 ./run votes
+
 ./run bills
+
 ./run amendments
 
-Now on to actually using this app:
+****Now on to actually using this app:
 
 In local_settings.py, define the necessary variables
 
-In settings.py: from local_settings import *
+In settings.py, add: from local_settings import *
 
 Then:
 
@@ -46,6 +48,6 @@ python manage.py parse_bills
 
 python manage.py parse_amendments
 
-(not all info is extracted from bills because the structure can vary. but improvements are welcome)
+(not all info is extracted from bills and amendments because the structure can vary. but improvements are welcome--in particular, actions are missing and should be added)
 
 A lot of the magic happens in dicttomodel.py, that uses model introspection to intelligently fit JSON into Django model--not very complicated, but using this framework will make expanding and modifying the relational-db representations of the JSON files a lot simpler.
