@@ -37,6 +37,9 @@ def process_file(congno):
                 for subject in j['subjects']:
                     bill.billsubject_set.create( subject=subject )
 
+                for committee in j['committees']:
+                    bill.committees.add( Committee.objects.get(pk=committee['committee_id']) )
+
 
 
 class Command(BaseCommand):

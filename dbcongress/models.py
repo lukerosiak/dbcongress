@@ -160,8 +160,6 @@ class SubcommitteeMembership(models.Model):
 
 
 
-#amendment
-
 class Bill(models.Model):
     bill_id = models.TextField(primary_key=True)
     bill_type = models.TextField(blank=True)
@@ -183,6 +181,7 @@ class Bill(models.Model):
     sponsor_name = models.TextField(blank=True,verbose_name="sponsor__name")
     sponsor_type = models.TextField(blank=True,verbose_name="sponsor__type")
 
+    committees = models.ManyToManyField(Committee)
 
 class Cosponsor(models.Model):
     bill = models.ForeignKey(Bill)
@@ -228,72 +227,13 @@ class BillSubject(models.Model):
       "committee_id": "SSCM"
     }
   ], 
-  "congress": "113", #ok
-  "cosponsors": [
-    {
-      "district": null, 
-      "name": "Wyden, Ron", 
-      "sponsored_at": "2013-01-22", 
-      "state": "OR", 
-      "thomas_id": "01247", 
-      "title": "Sen", 
-      "withdrawn_at": null
-    }
-  ], 
   "enacted_as": null, 
   "history": {
     "awaiting_signature": false, 
     "enacted": false, 
     "vetoed": false
   }, 
-  "introduced_at": "2013-01-22", #ok
-  "number": "4", #ok
-  "official_title": "A bill to create jobs and strengthen our economy by rebuilding our Nation's infrastructure.", #ok
-  "popular_title": null, #ok
   "related_bills": [], 
-  "short_title": "Rebuild America Act",#ok 
-  "sponsor": {
-    "district": null, 
-    "name": "Reid, Harry", 
-    "state": "NV", 
-    "thomas_id": "00952", 
-    "title": "Sen", 
-    "type": "person"
-  }, 
-  "status": "REFERRED", #ok
-  "status_at": "2013-01-22", #ok
-  "subjects": [ ####todo
-    "Academic performance and assessments", 
-    "Advanced technology and technological innovations", 
-    "Alternative and renewable resources", 
-    "Atmospheric science and weather", 
-    "Dams and canals", 
-    "Economics and public finance", 
-    "Education programs funding", 
-    "Educational facilities and institutions", 
-    "Electric power generation and transmission", 
-    "Elementary and secondary education", 
-    "Employee hiring", 
-    "Energy efficiency and conservation", 
-    "Environmental health", 
-    "Environmental technology", 
-    "Floods and storm protection", 
-    "Higher education", 
-    "Income tax credits", 
-    "Income tax deductions", 
-    "Infrastructure development", 
-    "Internet and video services", 
-    "Natural disasters", 
-    "Navigation, waterways, harbors", 
-    "Oil and gas", 
-    "Public-private cooperation", 
-    "Railroads", 
-    "Transportation programs funding", 
-    "Water quality", 
-    "Water resources funding", 
-    "Water use and supply"
-  ], 
-  "subjects_top_term": "Economics and public finance", 
   "summary": {
     "as": "Introduced", 
     "date": "2013-01-22", 
@@ -311,7 +251,6 @@ class BillSubject(models.Model):
       "type": "official"
     }
   ], 
-  "updated_at": "2013-02-16T04:17:49-05:00"
 }"""
 
 
