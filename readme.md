@@ -33,3 +33,5 @@ python manage.py parse_bills
 (not all info is extracted from bills because the structure can vary. but improvements are welcome)
 
 still need to do amendments and some others
+
+A lot of the magic happens in dicttomodel.py, that uses model introspection to intelligently fit JSON into Django model--not very complicated, but using this framework will make expanding and modifying the relational-db representations of the JSON files a lot simpler.
